@@ -1,0 +1,231 @@
+\documentclass[12pt]{report}
+\usepackage{graphicx}                                   %% This package adds graphic options
+\usepackage{subcaption}                                 %% This package modifies caption layout
+\usepackage{threeparttable}                             %% This package modifies figure spacing
+\usepackage{tikz}                                       %% This figure allows the IHG logo on title page
+\usepackage{booktabs}                                   %% This package is for tables
+\usepackage[export]{adjustbox}                          %% This package aligns photos within a table
+\usepackage{array}                                      %% This package allows for customizing tables
+\usepackage{rotating}                                   %% This package is for rotating tables
+\usepackage{colortbl}                                   %% This package adds color to tables
+\usepackage{fancyhdr}                                   %% This package adds fancy headers
+\usepackage{multirow}                                   %% This package adds combined rows to tables
+\usepackage{xcolor}                                     %% This package adds colors to the document
+\usepackage{sectsty}                                    %% This package modifies chapters and sections
+\usepackage[titles]{tocloft}                            %% This package modifies TOC layout
+\usepackage[a4paper,margin=2.5cm,bottom=2cm]{geometry}  %% This package describes page layout
+\usepackage{setspace}                                   %% This package is for line spacing
+\usepackage{titlesec}                                   %% This package modifies section titles
+\usepackage{enumerate}                                  %% This package is for numbered lists
+\usepackage{siunitx}                                    %% This package is for SI unit abreviations
+\usepackage[version=4]{mhchem}                          %% This package is for typing chemical components
+\usepackage[backend=biber,style=apa,sortcites=yes]{biblatex}    %% This package is for refernces, APA, Sorting
+
+
+\DeclareFieldFormat[article]{journaltitle}{#1}          %% Removes italics from bibliography
+\DeclareFieldFormat[article]{volume}{#1}                %% Removes italics from bibliography
+\DeclareFieldFormat[inbook]{booktitle}{#1}              %% Removes italics from bibliography
+\DeclareFieldFormat[manual]{title}{#1}                  %% Removes italics from bibliography
+\DeclareFieldFormat[report]{title}{#1}                  %% Removes italics from bibliography
+
+\DeclareLanguageMapping{english}{english-apa}           %% Set the cites to APA english style
+\addbibresource{sections/references.bib}                %% Add the bibilograph document
+
+%% -------------------------------BELOW this for full citations hyperlinks--------------------------%%
+%% -------------------------------BELOW this for full citations hyperlinks--------------------------%%
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parenciteA}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\printnames{labelname}, \printdate}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+  \printtext[bibhyperref]{ \usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}
+
+
+\DeclareCiteCommand{\citeauthor}
+    {}
+    {\bibhyperref{\printnames{labelname}}}
+    {\multicitedelim}
+    {}
+
+\DeclareCiteCommand{\citeauthoryear}
+    {}
+    {\bibhyperref{\printnames{labelname} \printdate}}
+    {\multicitedelim}
+    {}
+
+\DeclareCiteCommand{\citeauthoryearpar}
+    {}
+    {\bibhyperref{\printnames{labelname} \mkbibparens{\printdate}}}
+    {\multicitedelim}
+    {}
+
+\DeclareCiteCommand{\citeyearpar}
+    {}
+    {\mkbibparens{\bibhyperref{\printdate}}}
+    {\multicitedelim}
+    {}
+
+%% -------------------------------ABOVE this for full citations--------------------------%%
+%% -------------------------------ABOVE this for full citations--------------------------%%
+
+
+\usepackage{hyperref}                           %% Package is for hyperlinking refrences
+\usepackage[nameinlink,capitalize]{cleveref}    %% Package for refrences,links entire name, capitalized "Fig."
+
+
+
+
+%%===============================================PAGE SETUP==========================================================
+  \hypersetup{                                %% Sets hyperlink style,
+    colorlinks  =   true,                       %% All links are colored
+    urlcolor    =   blue,                       %% DOI color is blue
+    linkcolor   =   blue,                       %% Set link color
+    linktoc     =   page,                       %% Only the TOC page numbers are linked "all"=page and title
+    citecolor   =   blue}                       %% Set cite color
+
+  \captionsetup{                              %% Sets format of figure and table captions
+    labelsep        = period,                   %% Period label seperator
+    skip            = 3pt,                      %% Sets the gap space between the figure and caption
+    font            = {small,sf},               %% Small text, sans serif font
+    labelfont       = bf,                       %% Fig and Table are bolded
+    singlelinecheck = false}                    %% Single line check
+
+  \captionsetup[sub]{                         %% Sets format of figure and table  SUBcaptions
+    font            = {footnotesize,sf},        %% Smaller text, sans serif font
+%    labelfont       = normalfont,              %% Subcaption labels are normal font
+    singlelinecheck = false}                    %% Single line check
+
+
+\pagestyle{fancy}                           %% Sets up the headers and footers
+    \fancyhead{}                                    %% clear all header fields
+    \lhead{                                         %% Format the left header
+      \fontsize{10}{12}\selectfont                  %% Font size
+      \textcolor{gray}                                                  %% Text color
+      {\bfseries Aquatic Habitat Modeling}}         %% Bold font
+
+%% Section title spacing
+    \titlespacing*{\section}{0pt}{\baselineskip}{0\baselineskip}        %% No indent, 1 line above, 0 lines below
+    \titlespacing*{\subsection}{0pt}{0\baselineskip}{0\baselineskip}    %% No indent, 0 lines above, 0 lines below
+    \titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0\baselineskip} %% No indent, 0 lines above, 0 lines below
+
+%% Table set up
+    \newcolumntype{B}[1]{>{\centering\arraybackslash}b{#1}}    %% Table paragraph collumn that is centered on the bottom
+    \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}b{#1}}   %% Table paragraph collumn that is right aligned on the bottom
+
+
+%%================================================END PAGE SETUP============================================
+
+
+
+
+%%=============================================BEGIN DOCUMENT===============================================
+
+\begin{document}                            %% Begin the report document
+
+    \onehalfspacing                                               %% Sets 1.5 line spacing
+
+    \setlength{\parskip}{.4\baselineskip}%                        %% Sets the spacing between paragraphs
+    \setlength{\parindent}{0pt}%                                  %% Removes the indents from paragaphs
+    \renewcommand{\thesection}{\arabic{section}}                  %% Removes chapter number from headings
+
+%%-----------------TITLE PAGE
+  \include{sections/titlepage}                            %% Clears page and adds title page then clears page
+
+
+%%-----------------ABSTRACT
+    \onehalfspacing                                         %% Sets 1.5 line spacing
+    \pagenumbering{roman}                                   %% Sets page number to roman numeral
+    \fancyfoot{}                                            %% clear all footer fields (Hide page numbers)
+
+  \include{sections/abstract}                             %% Clears page and adds abstract page then clears page
+
+
+%%----------------TABLE OF CONTENTS
+    \onehalfspacing                                               %% Sets 1.5 line spacing
+    \phantomsection                                                 %% Phantom section so TOC links here
+  \let\chapter\section\tableofcontents                            %% Insert TOC as a section
+      \renewcommand{\cftsecfont}{\fontseries{b}\selectfont}         %% Set TOC sections to bold
+      \addcontentsline{toc}{section}{Table of contents}             %% Add TOC to table of contents page
+
+
+%%----------BODY
+    \cleardoublepage                                        %% Reset page numbering
+    \pagenumbering{arabic}                                  %% Page number in arabic
+    \cfoot{\thepage}                                        %% Adds page numbers to footer
+
+    \onehalfspacing                                         %% Sets 1.5 line spacing
+    \setcounter{secnumdepth}{3}                             %% Adds sub-subsection number
+%  \input{sections/introduction}                                   %% Adds introduction to report
+%  \input{sections/methods}                                        %% Adds methods to report
+  \input{sections/results}                                        %% Adds results to report
+%  \input{sections/discussion}                                     %% Adds discussion to report
+
+%  \input{sections/conclusion}                                     %% Adds conclusion to report
+
+    \clearpage                                                  %% Clears page before References
+
+
+%%------------REFERENCES and APPENDIX
+
+
+    \onehalfspacing                                                 %% Sets 1.5 line spacing
+    \fancyfoot{}                                                    %% clear all footer fields (Hide page numbers)
+    \nocite{*}                                                      %% List references even if uncited
+    \printbibliography[title=References,heading=subbibnumbered]     %% Add bibliography, Change title, Number Section
+
+  \include{sections/appendix}                                 %% Clear page and add appendix clear page
+
+\end{document}                              %% End document
+
